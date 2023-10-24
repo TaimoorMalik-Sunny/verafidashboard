@@ -3,6 +3,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { calcCreditScore, calcLaonSuccessProbability, calcPreApproval, calcWalletAttributes, fetchNFTsForOwner, fetchTitleForOwner, fetchTokensForOwner, generatePdf, getHighestLtvLoans, getWalletAttributes, getWalletNftsCount } from './asyncThunks';
 import { GraphQLResult } from '@/types';
 import { OwnedNft, OwnedToken } from 'alchemy-sdk';
+import { Loan } from '@/types/graphql';
 
 
 
@@ -29,7 +30,7 @@ interface StateType {
     titleOfOwner?:any
     linkofreport?:any
     nftcounts:{noOfBlueChipTokens:number, noOfTokens:number}
-    getHighestLtvLoans?:any
+    getHighestLtvLoans?: Loan[] | null
     
     
 
