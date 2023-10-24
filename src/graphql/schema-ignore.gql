@@ -1,0 +1,102 @@
+scalar AWSDate # YYYY-MM-DD
+scalar AWSDateTime  # YYYY-MM-DDThh:mm:ss.sssZ
+scalar AWSJSON
+
+
+type Query {
+    getWalletAttributes(input: GetWalletAttributesInput!): WalletAttributes!
+    predictCreditScore(input: PredictCreditScoreInput!): AWSJSON
+    getWalletNftsCount(input: GetWalletNftsCountInput!): GetWalletNftsCountOutput!
+    getHighestLtvLoans: [Loan!]!
+}
+
+type Mutation {
+    calcWalletAttributes(input: CalcWalletAttributesInput!): WalletAttributes!
+    calcCreditScore(input: CalcCreditScoreInput!): CalcCreditScoreOutput!
+    calcPreApproval(input: CalcPreApprovalInput!): CalcPreApprovalOutput!
+    calcLaonSuccessProbability(input: CalcLaonSuccessProbabilityInput!): CalcLaonSuccessProbabilityOutput!
+
+}
+
+
+######################## types ##############################
+
+    type Response {
+        message: String!
+        # success: Boolean!
+        # warning: String!
+    }
+
+    type WalletAttributes {
+        id: ID!
+        attrs: AWSJSON!
+        createdAt: AWSDateTime!
+    }
+
+    type CalcCreditScoreOutput { 
+        score: Int!
+    }
+    type CalcPreApprovalOutput { 
+       preApprovalNftfi: Float!
+       preApprovalBendDao: Float!
+    }
+    type CalcLaonSuccessProbabilityOutput { 
+        probability: Float!
+    }
+    type GetWalletNftsCountOutput {
+        noOfTokens: Int!
+        noOfBlueChipTokens: Int!
+    }
+
+    type Loan {
+        amountUsd: Float
+        amountEth: Float
+        loanDurationSec: Int
+        ltv: Float # loan to value ratio
+        asset: Asset
+    }
+
+    type Asset {
+        contractAddress: String!
+        balance: Int!
+        tokenId: String!
+        name: String
+        symbol: String
+        imgUrl: String
+    }
+
+
+######################## input types ##############################
+    input PredictCreditScoreInput {
+        walletAddress: String!
+    }
+    input GetWalletAttributesInput {
+        walletAddress: String!
+    }
+    input CalcCreditScoreInput {
+        walletAddress: String!
+    }
+    input CalcPreApprovalInput {
+        walletAddress: String!
+    }
+    input CalcLaonSuccessProbabilityInput {
+        walletAddress: String!
+        loanRequired_eth: Float!
+        purpose: String
+        repaymentDays: Int!
+        appliedInterestRate: Int!
+        blockchainType: BlockChainType = ETHEREUM
+    }
+    input CalcWalletAttributesInput {
+        walletAddress: String!
+        # isTimeBaseLoan: Boolean!
+    }
+    input GetWalletNftsCountInput {
+        walletAddress: String!
+    }
+
+########################### enum ##################################
+
+    enum BlockChainType {
+        ETHEREUM
+    }

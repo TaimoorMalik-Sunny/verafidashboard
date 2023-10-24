@@ -1,0 +1,22 @@
+overwrite: true
+schema: "src/graphql/schema-ignore.gql"
+documents: null
+generates:
+  src/types/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+          maybeValue: T
+          scalars:
+            AWSPhone: string
+            AWSEmail: string
+            AWSURL: string
+            AWSTimestamp: number
+            AWSJSON: string
+            
+config:
+  declarationKind: 'interface'
+  useImplementingTypes: true
+  # skipTypename: true
+  # maybeValue: T
