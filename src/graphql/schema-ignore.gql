@@ -43,9 +43,9 @@ type Mutation {
     type CalcLaonSuccessProbabilityOutput { 
         probability: Float!
     }
-    type GetWalletNftsCountOutput {
-        noOfTokens: Int!
-        noOfBlueChipTokens: Int!
+   type GetWalletNftsCountOutput {
+        noOfNftTokens: Int!
+        noOfBlueChipNftTokens: Int!
     }
 
     type Loan {

@@ -70,11 +70,11 @@ const SwiperComponent2 = () => {
        
          {getHighestLtvLoans?.map(( loan :any, idx: number )=>{
             return (  
-              <> 
+              
               <div  key={idx} className="swiper-slide">  
-              <CardviewA title={loan.asset['name']} balance={loan.asset['balance']} loanDurationSec={loan.loanDurationSec} ltv={loan.ltv} titleimage={loan.asset['imgUrl']}/>    
+              <CardviewA title={loan.asset['name']} balance={loan.asset['balance']} apr={loan.loanDurationSec} ltv={loan.ltv} titleimage={loan.asset['imgUrl']}/>    
               </div>
-              </>
+              
        
              
           )

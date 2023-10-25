@@ -11,13 +11,13 @@ import { useAppSelector } from '@/redux/store';
 interface CardviewProps {
   title: string;
   balance: string |number;
-  loanDurationSec: string |number;
+  apr: string |number;
   ltv: string |number;
   titleimage:  string ;
 }
 
 
-export default function CardviewA({title,balance,loanDurationSec,ltv,titleimage}:CardviewProps) {
+export default function CardviewA({title,balance,apr,ltv,titleimage}:CardviewProps) {
   
   return (
     <div className="">
@@ -34,23 +34,20 @@ export default function CardviewA({title,balance,loanDurationSec,ltv,titleimage}
           alt="green iguana"
         
         />
-      <CardActionArea>
+     
        
-        <CardContent className=" relative h-24  mt-32 bg-opacity-90 backdrop-blur-lg rounded drop-shadow-lg">
-       
-          
-          <h4 className="scroll-m-20 text-xs font-semibold tracking-tight">
+        <div className=" relative h-24 mt-28 bg-opacity-90 backdrop-blur-lg rounded drop-shadow-lg ">
+       <h4 className=" text-left ml-2 text-xs font-semibold ">
           {/* Bored ApeYacht  */}
           {title}
-    </h4>
-         
-          <ul className="my-2 ml-2 list-disc [&>li]:mt-0">
-      <li className=" text-xs">Loan:{balance} ETH</li>
-      <li className="text-xs">Duration:{loanDurationSec}months</li>
-      <li className="text-xs">Loan APR:{ltv} %</li>
+        </h4>  
+      <ul className="my-2 ml-2 list-disc">
+      <li className=" text-xs">Loan:${balance}</li>
+      <li className="text-xs">LTV:{ltv}</li>
+      <li className="text-xs">Loan APR:{apr} %</li>
     </ul>
-        </CardContent>
-      </CardActionArea>
+        </div>
+     
       {/* <CardActions>
         <Button size="small" color="primary">
           Share

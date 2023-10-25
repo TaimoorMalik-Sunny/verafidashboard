@@ -56,18 +56,23 @@ const SwiperComponent2 = () => {
           prevEl: '.swiper-button-prev', // Previous button
         }}
       >
-
-        {getHighestLtvLoans?.map((loan: any, idx: number) => {
+        
+      {!fetchingStatus.getHighestLtvLoans?<>{getHighestLtvLoans?.map((loan: any, idx: number) => {
           return (
+            <>
             <SwiperSlide key={idx}>
-              <CardviewA title={loan.asset['name']} balance={loan.asset['balance']} loanDurationSec={loan.loanDurationSec} ltv={loan.ltv} titleimage={loan.asset['imgUrl']} />
+              <CardviewA title={loan.asset['name']} balance={loan.asset['balance']} apr={loan.apr} ltv={loan.ltv} titleimage={loan.asset['imgUrl']} />
             </SwiperSlide>
+          
+            </>
+            
           )
-        })}
-        <SwiperSlide>
+        })}</>
+        :<>
+      <SwiperSlide>
           <CardviewB />
         </SwiperSlide>
-        <SwiperSlide>
+          <SwiperSlide>
           <CardviewC />
         </SwiperSlide>
         <SwiperSlide>
@@ -82,6 +87,8 @@ const SwiperComponent2 = () => {
         <SwiperSlide>
           <CardviewC />
         </SwiperSlide>
+        </>
+        } 
         <div className="swiper-pagination"></div>
         <div className="swiper-button-prev"></div>
         <div className="swiper-button-next"></div>

@@ -45,10 +45,10 @@ export const PreApprovals = () => {
            <MdOutlineSms/>
             </span>
             
-         {fetchingStatus.getWalletNftsCount?<Skeleton className="h-4 w-[150px]" /> :
+         {fetchingStatus.getWalletNftsCount?<Skeleton className="h-4 w-[150px]"/> :
          
       <>{ nftcounts?<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-                {nftcounts?.noOfBlueChipTokens}
+                {nftcounts?.noOfBlueChipNftTokens}
             </h1>
             
           :<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -61,11 +61,11 @@ export const PreApprovals = () => {
 
             <HoverCard>
       <HoverCardTrigger asChild>
-        {nftcounts.noOfBlueChipTokens>0?
+        {nftcounts.noOfBlueChipNftTokens>0?
     <span className="hover:underline">
-        <LabelPositions value={(nftcounts?.noOfBlueChipTokens)/(nftcounts?.noOfTokens)*100}/>
+        <LabelPositions value={(nftcounts?.noOfBlueChipNftTokens)/(nftcounts?.noOfNftTokens)*100}/>
     </span>:
-    <LabelPositions value={(nftcounts?.noOfBlueChipTokens)/(nftcounts?.noOfTokens)*100}/>
+    <LabelPositions value={0}/>
        }
       </HoverCardTrigger>
       <HoverCardContent className="w-80">

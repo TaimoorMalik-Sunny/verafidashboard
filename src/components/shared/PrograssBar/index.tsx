@@ -19,6 +19,8 @@ export default function LabelPositions({value}:PrograssProps) {
       color="indigo"
       
       
+      
+      
     />
   )
 }

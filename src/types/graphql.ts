@@ -78,8 +78,8 @@ export interface GetWalletNftsCountInput {
 
 export interface GetWalletNftsCountOutput {
   __typename?: 'GetWalletNftsCountOutput';
-  noOfBlueChipTokens: Scalars['Int'];
-  noOfTokens: Scalars['Int'];
+  noOfBlueChipNftTokens: Scalars['Int'];
+  noOfNftTokens: Scalars['Int'];
 }
 
 export interface Loan {
@@ -323,8 +323,8 @@ export type CalcPreApprovalOutputResolvers<ContextType = any, ParentType extends
 };
 
 export type GetWalletNftsCountOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['GetWalletNftsCountOutput'] = ResolversParentTypes['GetWalletNftsCountOutput']> = {
-  noOfBlueChipTokens?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  noOfTokens?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  noOfBlueChipNftTokens?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  noOfNftTokens?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

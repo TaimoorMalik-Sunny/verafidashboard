@@ -29,7 +29,7 @@ interface StateType {
     tokendataCount?:any
     titleOfOwner?:any
     linkofreport?:any
-    nftcounts:{noOfBlueChipTokens:number, noOfTokens:number}
+    nftcounts:{noOfBlueChipNftTokens:number, noOfNftTokens:number}
     getHighestLtvLoans?: Loan[] | null
     
     
@@ -71,7 +71,7 @@ const initialState: StateType = {
     
 //     address:"0x715924a02ee6bc69e51c2bbf7d06bfef3db8d8e4",
  //  address:"0x0fe93C4feBD368204D81758468EE5BFAF623fA5f",
- nftcounts:{noOfBlueChipTokens:0, noOfTokens:1},
+ nftcounts:{noOfBlueChipNftTokens:0, noOfNftTokens:1},
    score:0,
     fetchingStatus: {
         getWalletDetails: false,
@@ -159,6 +159,7 @@ const slice = createSlice({
             if(!payload)return
             
             const walletattributes = JSON.parse(payload.attrs)
+            state.userinfo = true;
             
           // console.log(walletattributes)
             state.attribute = walletattributes
@@ -297,7 +298,7 @@ const slice = createSlice({
              const nftstributes:OwnedNft[] = payload.ownedNfts
              state.nftsdata= nftstributes;
              state.nftsdataCount = payload.ownedNfts.length;
-            // console.log(nftstributes);
+            console.log(nftstributes);
             state.fetchingStatus.fetchNFTsForOwner = false;
             state.error.fetchNFTsForOwner = null;
           
@@ -383,7 +384,7 @@ const slice = createSlice({
              
              console.log(payload,"count nfts"+state.nftcounts)
       
-
+             
              state.fetchingStatus.getWalletNftsCount = false;
              state.error.getWalletNftsCount = null;
         })

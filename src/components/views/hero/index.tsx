@@ -23,6 +23,7 @@ import DaysAgoCounter from '@/components/shared/DayAgoCounter';
 
 import { OwnedNft} from 'alchemy-sdk';
 import { Footer } from '@/components/shared/Footer'
+import { GRAPHQL_API } from '@/app-config'
 
 
 let ethereum:any 
@@ -51,6 +52,10 @@ export const Hero = () => {
       
       
       console.log("call")
+      console.log(GRAPHQL_API)
+      console.log("is ko check krna hy "+userinfo)
+      
+    
      
    
        
@@ -76,7 +81,8 @@ export const Hero = () => {
         
         // dispatch(getWalletNftsCount({ walletAddress:addr[0]}))
         
-        dispatch(getWalletNftsCount({walletAddress:"0xfa3ce71036dd4564d7d8de19d2b90fb856c5be82"}))
+        // dispatch(getWalletNftsCount({walletAddress:"0xfa3ce71036dd4564d7d8de19d2b90fb856c5be82"}))
+        dispatch(getWalletNftsCount({walletAddress:addr[0]}))
 
         dispatch(getHighestLtvLoans())
         
@@ -125,7 +131,7 @@ export const Hero = () => {
 
   return (
     <div className=" flex flex-col justify-center items-center mt-2  mb-2 ">
-     
+    
      {userinfo?
       <div className=" flex justify-center  px-8 py-3 rounded-lg shadow-lg">
       <div className="flex items-center gap-4">
@@ -199,12 +205,12 @@ export const Hero = () => {
       </div>
       }</>
      }
-        
-        
-        <div className=" grid grid-cols-3 gap-x-1 mt-3 ">
+
+      {/* grid grid-cols-3 gap-x-1 mt-3 transform-box  blur-lg hover:blur-0  transition: 0.4s ease-in-out transform */}
+        <span className="blur-0 blur-lg"></span>
+        <div className={`grid grid-cols-3 gap-x-1 mt-3 transition delay-1000 ease-in-out ${userinfo?"transform-box-none blur-0":"transform-box blur-lg"}`}>
             <div className="w-100 px-6 py-3 h-full rounded-lg shadow-lg ">
-            
-           <PreApprovals/>
+             <PreApprovals/>
             </div>
             <div className=" w-100 px-6 py-3 h-full  rounded-lg shadow-lg ">
             <VerafiGrade/>

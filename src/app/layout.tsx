@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
        <Providers>
-      <body className={inter.className}>
+      <body className={`${inter.className} w-[1100px]  overflow-x-auto mx-auto`}>
       <Navbar/> 
       <RootWrapper>
         {children}

@@ -25,8 +25,8 @@ export const getWalletNftsCount = async ({ input }: QueryGetWalletNftsCountArgs)
         query:  /* GraphQL */`
         query MyQuery($input: GetWalletNftsCountInput!) {
             getWalletNftsCount(input: $input) {
-                noOfTokens
-                noOfBlueChipTokens            
+                noOfNftTokens
+                noOfBlueChipNftTokens            
         }
         }
         `,
