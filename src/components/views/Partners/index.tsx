@@ -28,17 +28,19 @@ export const Partners = () => {
          <Image className="rounded-full" src={benddao} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={blend} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={nftfi} alt="image" width={40} height={2} />
-         <Image className=" rounded-full" src={aavelogo} alt="image" width={40} height={2} />
+         <Image className="rounded-full" src={aavelogo} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={frakt} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={lur} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={sharky} alt="image" width={40} height={2} />
          <Image className=" rounded-full" src={logo1111} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={logo1112} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={logo1113} alt="image" width={40} height={2} />
-         <Image className="rounded-full" src={para} alt="image" width={40} height={2} />
+         <Image className="rounded-full" src={para} alt="image" width={80} height={2} />
          <Image className=" rounded-full" src={logo1115} alt="image" width={40} height={2} />
          <Image className="rounded-full" src={pine} alt="image" width={40} height={2} />
-         <Image className="rounded-full" src={citrus} alt="image" width={40} height={2} />
+         <Image 
+        //  className="" 
+         src={citrus} alt="image" width={60} height={2} />
          {/* <Image className="rounded-full" src={nftfi} alt="image" width={40} height={2} /> */}
     </div>
   )
