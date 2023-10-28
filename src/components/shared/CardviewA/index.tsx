@@ -23,7 +23,7 @@ export default function CardviewA({title,balance,apr,ltv,titleimage}:CardviewPro
     <div className="">
     
    
-    <Card className="rounded-lg  bg-slate-500 " sx={{ maxWidth: 345 }}>
+    <Card className="rounded-lg  bg-slate-500  " sx={{ maxWidth: 345 }}>
          <CardMedia
          className=" absolute h-48 w-48 rounded-lg"
           component="img"
