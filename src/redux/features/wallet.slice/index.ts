@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 // import { WritableDraft } from "immer/dist/internal";
-import { calcCreditScore, calcLaonSuccessProbability, calcPreApproval, calcWalletAttributes, fetchNFTsForOwner, fetchTitleForOwner, fetchTokensForOwner, generatePdf, getHighestLtvLoans, getWalletAttributes, getWalletNftsCount } from './asyncThunks';
+import { calcCreditScore, calcLaonSuccessProbability, calcPreApproval, calcWalletAttributes, fetchNFTsForOwner, fetchTitleForOwner, fetchTokensForOwner, generatePdf, getHighestLtvLoans, getWalletAttributes, getWalletNftsCount, getWalletTokensAndAssets } from './asyncThunks';
 import { GraphQLResult } from '@/types';
 import { OwnedNft, OwnedToken } from 'alchemy-sdk';
 import { Loan } from '@/types/graphql';
@@ -133,7 +133,7 @@ const slice = createSlice({
             state.userinfo = true;
             state.attribute = walletattributes
              
-            console.log(walletattributes)
+            // console.log(walletattributes)
             
             // const {credit_score} = payload.data
            
@@ -291,22 +291,29 @@ const slice = createSlice({
     
 
        
-          builder.addCase(fetchNFTsForOwner.fulfilled,  (state, { payload })=> {
+          builder.addCase(getWalletTokensAndAssets.fulfilled,  (state, { payload })=> {
             if(!payload)return
-             console.log(payload.ownedNfts.length);
+             console.log(payload.nfts);
+             console.log(payload.tokens);
              
-             const nftstributes:OwnedNft[] = payload.ownedNfts
+             const nftstributes = payload.nfts
+             const tokenstributes= payload.tokens
              state.nftsdata= nftstributes;
-             state.nftsdataCount = payload.ownedNfts.length;
-            console.log(nftstributes);
+
+             state.tokendataCount = tokenstributes[0].name == 'WETH' && tokenstributes[0].balance == 0.0 ? 0 : tokenstributes.length
+            console.log("tokendataCount",state.tokendataCount);
+             
+             state.tokendata= tokenstributes;
+             state.nftsdataCount = nftstributes.length;
+            console.log(nftstributes,tokenstributes);
             state.fetchingStatus.fetchNFTsForOwner = false;
             state.error.fetchNFTsForOwner = null;
           
           })
-          builder.addCase(fetchNFTsForOwner.pending,  (state, { payload })=> {
+          builder.addCase(getWalletTokensAndAssets.pending,  (state, { payload })=> {
             state.fetchingStatus.fetchNFTsForOwner = true;
           })
-          builder.addCase(fetchNFTsForOwner.rejected, (state, { payload, error }) => {
+          builder.addCase(getWalletTokensAndAssets.rejected, (state, { payload, error }) => {
             const err = JSON.parse(error.message || "{}") as GraphQLResult<any>
             console.log("payload.data.rejected ===>", err.errors?.[0]);
             state.fetchingStatus.fetchNFTsForOwner = false;
@@ -316,9 +323,10 @@ const slice = createSlice({
             // console.log(payload.tokens)
             // console.log(payload.tokens[0].rawBalance)
             const tokenstributes:OwnedToken[] = payload.tokens
+            
              state.tokendata= tokenstributes;
              state.tokendataCount= payload.tokens[0].rawBalance
-            // console.log(tokenstributes);
+            // console.log("tokendata",payload.tokens[0]);
             state.fetchingStatus.fetchTokensForOwner = false;
             state.error.fetchTokensForOwner = null;
           
@@ -424,7 +432,9 @@ const slice = createSlice({
           console.log("payload.data.rejected ===>", err.errors?.[0]);
            state.fetchingStatus.getHighestLtvLoans = false;
       })
+    
 
+      
     
     }
 });
@@ -434,4 +444,4 @@ export default slice.reducer;
 
 export const {setMyValue ,} = slice.actions;
 
-export { getWalletAttributes , getWalletNftsCount};
+export { getWalletAttributes , getWalletNftsCount ,getWalletTokensAndAssets};

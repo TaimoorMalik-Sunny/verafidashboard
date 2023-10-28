@@ -156,10 +156,10 @@ export const fetchNFTsForOwner = createAsyncThunk(
 )
 export const getHighestLtvLoans = createAsyncThunk(
   "queries/getHighestLtvLoans",
-  async ( thunkAPI) => {
-    
-      console.log('===== getting NTF count =====')
-      const res = await queries.getHighestLtvLoans();
+  async ({ walletAddress }: { walletAddress: string }, thunkAPI) => {
+    // const state = thunkAPI.getState() as RootStateType;
+     
+      const res = await queries.getHighestLtvLoans({ input: { walletAddress } });
       console.log(res)
      
     if (res.errors?.length)
@@ -168,6 +168,23 @@ export const getHighestLtvLoans = createAsyncThunk(
   
   }
 )
+
+
+
+export const getWalletTokensAndAssets = createAsyncThunk(
+  "queries/getWalletTokensAndAssets",
+  async ({ walletAddress }: { walletAddress: string }, thunkAPI) => {
+      // const state = thunkAPI.getState() as RootStateType;
+       console.log('===== calculation init NFTS and Token  =====')
+      const res = await queries.getWalletTokensAndAssets({ input: { walletAddress } }); 
+      console.log('===== GettingNFTSand Tokens =====',res)
+      if (res.errors?.length)
+      throw res.errors?.[0].message
+    return res.data?.getWalletTokensAndAssets
+  
+  }
+)
+
 
 
 // alchemy.nft.getNftsForOwner(walletAddress),

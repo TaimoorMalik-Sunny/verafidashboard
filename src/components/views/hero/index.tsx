@@ -17,7 +17,7 @@ import TransformBox from '@/components/shared/TransformBox'
 import '../../shared/TransformBox'; 
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { getWalletAttributes, setMyValue,getWalletNftsCount } from '@/redux/features/wallet.slice';
-import { calcCreditScore, calcPreApproval, fetchNFTsForOwner, fetchTitleForOwner, fetchTokensForOwner, getHighestLtvLoans } from '@/redux/features/wallet.slice/asyncThunks'
+import { calcCreditScore, calcPreApproval, fetchNFTsForOwner, fetchTitleForOwner, fetchTokensForOwner, getHighestLtvLoans, getWalletTokensAndAssets } from '@/redux/features/wallet.slice/asyncThunks'
 import Gettingavatarofowner from '@/components/shared/Gettingavatarofowner';
 import DaysAgoCounter from '@/components/shared/DayAgoCounter';
 
@@ -81,10 +81,11 @@ export const Hero = () => {
         
         // dispatch(getWalletNftsCount({ walletAddress:addr[0]}))
         
-        // dispatch(getWalletNftsCount({walletAddress:"0xfa3ce71036dd4564d7d8de19d2b90fb856c5be82"}))
+        //  dispatch(getWalletNftsCount({walletAddress:"0xfa3ce71036dd4564d7d8de19d2b90fb856c5be82"}))
         dispatch(getWalletNftsCount({walletAddress:addr[0]}))
-
-        dispatch(getHighestLtvLoans())
+        
+        dispatch(getHighestLtvLoans({walletAddress:addr[0]}))
+        
         
         // 0xfa3ce71036dd4564d7d8de19d2b90fb856c5be82
       
@@ -100,11 +101,15 @@ export const Hero = () => {
         
         //  address && 
         dispatch(calcPreApproval({ walletAddress:addr[0]}))
-        
-        dispatch(fetchNFTsForOwner({walletAddress:addr[0]}));
-      //  dispatch(fetchNFTsForOwner({walletAddress:"0xD5aE740ED785Cf3Fa54A176eE855A721591343D4"}));
-      // Fetch Tokens for a wallet address
-       dispatch(fetchTokensForOwner({ walletAddress:addr[0]}));
+        // dispatch(fetchNFTsForOwner({walletAddress:addr[0]}))
+         dispatch(getWalletTokensAndAssets({walletAddress:addr[0]}))
+      //  dispatch(getWalletTokensAndAssets({walletAddress:"0x3E18E3987b3B73F4E7CB80e2B25776Df7a30bb8b"}))
+
+        // 0x3E18E3987b3B73F4E7CB80e2B25776Df7a30bb8b
+      //   dispatch(fetchNFTsForOwner({walletAddress:addr[0]}));
+      // //  dispatch(fetchNFTsForOwner({walletAddress:"0xD5aE740ED785Cf3Fa54A176eE855A721591343D4"}));
+      // // Fetch Tokens for a wallet address
+      //  dispatch(fetchTokensForOwner({ walletAddress:addr[0]}));
        // dispatch(fetchTokensForOwner({ walletAddress:"0xD5aE740ED785Cf3Fa54A176eE855A721591343D4"}));
        
         //dispatch(fetchTitleForOwner({ walletAddress:"0x0fe93C4feBD368204D81758468EE5BFAF623fA5f"}))

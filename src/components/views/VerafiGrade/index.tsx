@@ -81,13 +81,13 @@ const  score_percentage = score?((score-300)/550) * 100 : 0
         disabled={!isFormReadyForSubmission()}>
           Download 
           <br />
-        report </button>}
+        Report </button>}
         
         </div>
 
         <span className=" w-40 h-32"> 
     <Flat
-	progress={score_percentage}
+	progress={+Number(score_percentage).toFixed(1)}
 	sign={{ value: '%', position: 'end' }}
 	text={'Grade'}
 	sx={{

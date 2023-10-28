@@ -12,7 +12,7 @@ export const LoanOpportunities = () => {
   return (
     <div className=" rounded-lg ">
         <div className="flex flex-col  gap-x-1 w-full ">
-            <span className=" flex justify-start items-center ml-6 gap-x-3 ">
+            <span className=" flex justify-center  items-center ml-6 gap-x-3 ">
             <h3 className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0">
           Loan Opportunities</h3>
             <MdOutlineSms/>

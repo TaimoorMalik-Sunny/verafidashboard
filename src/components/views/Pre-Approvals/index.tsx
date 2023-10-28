@@ -63,7 +63,7 @@ export const PreApprovals = () => {
       <HoverCardTrigger asChild>
         {nftcounts.noOfBlueChipNftTokens>0?
     <span className="hover:underline">
-        <LabelPositions value={(nftcounts?.noOfBlueChipNftTokens)/(nftcounts?.noOfNftTokens)*100}/>
+        <LabelPositions  value={+Number((nftcounts?.noOfBlueChipNftTokens)/(nftcounts?.noOfNftTokens)*100).toFixed(2)}/>
     </span>:
     <LabelPositions value={0}/>
        }

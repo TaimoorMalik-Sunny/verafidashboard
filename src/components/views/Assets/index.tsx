@@ -32,7 +32,7 @@ export const Assets = () => {
   
 
     <div className=" rounded-lg ">
-      <div className="flex items-center  gap-x-3  ">
+      <div className="flex items-center justify-center  gap-x-3  ">
       <h3 className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0">
           Assets</h3>
         <MdOutlineSms />
@@ -63,9 +63,9 @@ export const Assets = () => {
             <SkeletonCryproProfileinfo/>
             <SkeletonCryproProfileinfo/>
             </div>: 
-              tokendata?.map((tokendata: { logo: any; name: any; symbol: any; balance: any; }, idx: React.Key | null | undefined) => {
+              tokendata?.map((tokendata: { imgUrl: any; name: any; symbol: any; balance: any; }, idx: React.Key | null | undefined) => {
                 return <div key={idx} className="space-y-1">
-             <CryptoProfileInfo image={tokendata.logo || defaultTokenImg} title={tokendata.name || tokendata.symbol || ""} value={tokendata.balance || '0'} />
+             <CryptoProfileInfo image={tokendata.imgUrl || defaultTokenImg} title={tokendata.name || tokendata.symbol || ""} value={tokendata.balance || '0'} />
                 </div>
               })
             }</>}</>
@@ -97,11 +97,11 @@ export const Assets = () => {
            
             </div>: 
           
-              nftsdata?.map((nftsdata: { rawMetadata: { image: any; }; title: any; tokenId: any; balance: any; }, idx: React.Key | null | undefined) => {
+              nftsdata?.map((nftsdata: { rawMetadata: { imgUrl: any; }; name: any; tokenId: any; balance: any; }, idx: React.Key | null | undefined) => {
                console.log(nftsdata)
                 return <div key={idx} className="space-y-1">
                    
-                 <CryptoProfileInfo image={nftsdata.rawMetadata?.image || defaultTokenImg} title={nftsdata.title ||nftsdata.tokenId || ""} value={nftsdata.balance || '0'} /> 
+                 <CryptoProfileInfo image={nftsdata.rawMetadata?.imgUrl || defaultTokenImg} title={nftsdata.name ||nftsdata.tokenId || ""} value={nftsdata.balance || '0'} /> 
                 </div>
               })
             }</>}

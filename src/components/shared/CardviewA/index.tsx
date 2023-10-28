@@ -37,14 +37,14 @@ export default function CardviewA({title,balance,apr,ltv,titleimage}:CardviewPro
      
        
         <div className=" relative h-24 mt-28 bg-opacity-90 backdrop-blur-lg rounded drop-shadow-lg ">
-       <h4 className=" text-left ml-2 text-xs font-semibold ">
+       <h4 className="text-white text-left ml-2 text-xs font-semibold ">
           {/* Bored ApeYacht  */}
           {title}
         </h4>  
-      <ul className="my-2 ml-2 list-disc">
+      <ul className=" text-white my-2 ml-2 list-disc">
       <li className=" text-xs">Loan:${balance}</li>
-      <li className="text-xs">LTV:{ltv}</li>
-      <li className="text-xs">Loan APR:{apr} %</li>
+      {/* <li className="text-xs">LTV:{Number(ltv).toFixed(2)}</li> */}
+      <li className="text-xs">APR:{Number(apr).toFixed(1)} %</li>
     </ul>
         </div>
      

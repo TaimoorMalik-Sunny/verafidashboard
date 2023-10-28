@@ -23,6 +23,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
+import Link from 'next/link';
 
 
 const SwiperComponent2 = () => {
@@ -61,7 +62,9 @@ const SwiperComponent2 = () => {
           return (
             <>
             <SwiperSlide key={idx}>
-              <CardviewA title={loan.asset['name']} balance={loan.asset['balance']} apr={loan.apr} ltv={loan.ltv} titleimage={loan.asset['imgUrl']} />
+              <Link href={loan.loanPlatform['websiteUrl']}>
+              <CardviewA title={loan.asset['name']} balance={loan.amountUsd} apr={loan.apr} ltv={loan.ltv} titleimage={loan.asset['imgUrl']} />
+              </Link>
             </SwiperSlide>
           
             </>

@@ -68,6 +68,19 @@ export interface CalcWalletAttributesInput {
   walletAddress: Scalars['String'];
 }
 
+export interface Crypto {
+  __typename?: 'Crypto';
+  balance: Scalars['Int'];
+  contractAddress: Scalars['String'];
+  imgUrl?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  symbol?: Maybe<Scalars['String']>;
+}
+
+export interface GetHighestLtvLoansInput {
+  walletAddress?: InputMaybe<Scalars['String']>;
+}
+
 export interface GetWalletAttributesInput {
   walletAddress: Scalars['String'];
 }
@@ -82,12 +95,24 @@ export interface GetWalletNftsCountOutput {
   noOfNftTokens: Scalars['Int'];
 }
 
+export interface GetWalletTokensAndAssetsInput {
+  walletAddress: Scalars['String'];
+}
+
+export interface GetWalletTokensAndAssetsOutput {
+  __typename?: 'GetWalletTokensAndAssetsOutput';
+  nfts: Array<Maybe<Asset>>;
+  tokens: Array<Maybe<Crypto>>;
+}
+
 export interface Loan {
   __typename?: 'Loan';
   amountEth?: Maybe<Scalars['Float']>;
   amountUsd?: Maybe<Scalars['Float']>;
+  apr?: Maybe<Scalars['Float']>;
   asset?: Maybe<Asset>;
   loanDurationSec?: Maybe<Scalars['Int']>;
+  loanPlatform?: Maybe<Platform>;
   ltv?: Maybe<Scalars['Float']>;
 }
 
@@ -119,6 +144,13 @@ export interface MutationCalcWalletAttributesArgs {
   input: CalcWalletAttributesInput;
 }
 
+export interface Platform {
+  __typename?: 'Platform';
+  logoUrl?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  websiteUrl?: Maybe<Scalars['String']>;
+}
+
 export interface PredictCreditScoreInput {
   walletAddress: Scalars['String'];
 }
@@ -128,7 +160,13 @@ export interface Query {
   getHighestLtvLoans: Array<Loan>;
   getWalletAttributes: WalletAttributes;
   getWalletNftsCount: GetWalletNftsCountOutput;
+  getWalletTokensAndAssets: GetWalletTokensAndAssetsOutput;
   predictCreditScore?: Maybe<Scalars['AWSJSON']>;
+}
+
+
+export interface QueryGetHighestLtvLoansArgs {
+  input?: InputMaybe<GetHighestLtvLoansInput>;
 }
 
 
@@ -139,6 +177,11 @@ export interface QueryGetWalletAttributesArgs {
 
 export interface QueryGetWalletNftsCountArgs {
   input: GetWalletNftsCountInput;
+}
+
+
+export interface QueryGetWalletTokensAndAssetsArgs {
+  input: GetWalletTokensAndAssetsInput;
 }
 
 
@@ -240,14 +283,19 @@ export type ResolversTypes = {
   CalcPreApprovalInput: CalcPreApprovalInput;
   CalcPreApprovalOutput: ResolverTypeWrapper<CalcPreApprovalOutput>;
   CalcWalletAttributesInput: CalcWalletAttributesInput;
+  Crypto: ResolverTypeWrapper<Crypto>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
+  GetHighestLtvLoansInput: GetHighestLtvLoansInput;
   GetWalletAttributesInput: GetWalletAttributesInput;
   GetWalletNftsCountInput: GetWalletNftsCountInput;
   GetWalletNftsCountOutput: ResolverTypeWrapper<GetWalletNftsCountOutput>;
+  GetWalletTokensAndAssetsInput: GetWalletTokensAndAssetsInput;
+  GetWalletTokensAndAssetsOutput: ResolverTypeWrapper<GetWalletTokensAndAssetsOutput>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Loan: ResolverTypeWrapper<Loan>;
   Mutation: ResolverTypeWrapper<{}>;
+  Platform: ResolverTypeWrapper<Platform>;
   PredictCreditScoreInput: PredictCreditScoreInput;
   Query: ResolverTypeWrapper<{}>;
   Response: ResolverTypeWrapper<Response>;
@@ -269,14 +317,19 @@ export type ResolversParentTypes = {
   CalcPreApprovalInput: CalcPreApprovalInput;
   CalcPreApprovalOutput: CalcPreApprovalOutput;
   CalcWalletAttributesInput: CalcWalletAttributesInput;
+  Crypto: Crypto;
   Float: Scalars['Float'];
+  GetHighestLtvLoansInput: GetHighestLtvLoansInput;
   GetWalletAttributesInput: GetWalletAttributesInput;
   GetWalletNftsCountInput: GetWalletNftsCountInput;
   GetWalletNftsCountOutput: GetWalletNftsCountOutput;
+  GetWalletTokensAndAssetsInput: GetWalletTokensAndAssetsInput;
+  GetWalletTokensAndAssetsOutput: GetWalletTokensAndAssetsOutput;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   Loan: Loan;
   Mutation: {};
+  Platform: Platform;
   PredictCreditScoreInput: PredictCreditScoreInput;
   Query: {};
   Response: Response;
@@ -322,17 +375,34 @@ export type CalcPreApprovalOutputResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CryptoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Crypto'] = ResolversParentTypes['Crypto']> = {
+  balance?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  contractAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  imgUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  symbol?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type GetWalletNftsCountOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['GetWalletNftsCountOutput'] = ResolversParentTypes['GetWalletNftsCountOutput']> = {
   noOfBlueChipNftTokens?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   noOfNftTokens?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type GetWalletTokensAndAssetsOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['GetWalletTokensAndAssetsOutput'] = ResolversParentTypes['GetWalletTokensAndAssetsOutput']> = {
+  nfts?: Resolver<Array<Maybe<ResolversTypes['Asset']>>, ParentType, ContextType>;
+  tokens?: Resolver<Array<Maybe<ResolversTypes['Crypto']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type LoanResolvers<ContextType = any, ParentType extends ResolversParentTypes['Loan'] = ResolversParentTypes['Loan']> = {
   amountEth?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   amountUsd?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  apr?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   asset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
   loanDurationSec?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  loanPlatform?: Resolver<Maybe<ResolversTypes['Platform']>, ParentType, ContextType>;
   ltv?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -344,10 +414,18 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   calcWalletAttributes?: Resolver<ResolversTypes['WalletAttributes'], ParentType, ContextType, RequireFields<MutationCalcWalletAttributesArgs, 'input'>>;
 };
 
+export type PlatformResolvers<ContextType = any, ParentType extends ResolversParentTypes['Platform'] = ResolversParentTypes['Platform']> = {
+  logoUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  websiteUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getHighestLtvLoans?: Resolver<Array<ResolversTypes['Loan']>, ParentType, ContextType>;
+  getHighestLtvLoans?: Resolver<Array<ResolversTypes['Loan']>, ParentType, ContextType, RequireFields<QueryGetHighestLtvLoansArgs, never>>;
   getWalletAttributes?: Resolver<ResolversTypes['WalletAttributes'], ParentType, ContextType, RequireFields<QueryGetWalletAttributesArgs, 'input'>>;
   getWalletNftsCount?: Resolver<ResolversTypes['GetWalletNftsCountOutput'], ParentType, ContextType, RequireFields<QueryGetWalletNftsCountArgs, 'input'>>;
+  getWalletTokensAndAssets?: Resolver<ResolversTypes['GetWalletTokensAndAssetsOutput'], ParentType, ContextType, RequireFields<QueryGetWalletTokensAndAssetsArgs, 'input'>>;
   predictCreditScore?: Resolver<Maybe<ResolversTypes['AWSJSON']>, ParentType, ContextType, RequireFields<QueryPredictCreditScoreArgs, 'input'>>;
 };
 
@@ -371,9 +449,12 @@ export type Resolvers<ContextType = any> = {
   CalcCreditScoreOutput?: CalcCreditScoreOutputResolvers<ContextType>;
   CalcLaonSuccessProbabilityOutput?: CalcLaonSuccessProbabilityOutputResolvers<ContextType>;
   CalcPreApprovalOutput?: CalcPreApprovalOutputResolvers<ContextType>;
+  Crypto?: CryptoResolvers<ContextType>;
   GetWalletNftsCountOutput?: GetWalletNftsCountOutputResolvers<ContextType>;
+  GetWalletTokensAndAssetsOutput?: GetWalletTokensAndAssetsOutputResolvers<ContextType>;
   Loan?: LoanResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Platform?: PlatformResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Response?: ResponseResolvers<ContextType>;
   WalletAttributes?: WalletAttributesResolvers<ContextType>;

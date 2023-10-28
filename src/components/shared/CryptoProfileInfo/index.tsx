@@ -17,7 +17,7 @@ const CryptoProfileInfo = ({ title, value, image }: ImageProps) => {
         <span className="flex items-center  flex-col px-2 justify-between">
         <h1 className="ml-2 text-base">{title}</h1>
      
-      <p className=" text-xs overflow-hidden overflow-ellipsis text-gray-500">{value}</p>
+      <p className=" text-xs overflow-hidden overflow-ellipsis text-gray-500">{Number(value).toFixed(1)}</p>
       </span>
     </div>
   )

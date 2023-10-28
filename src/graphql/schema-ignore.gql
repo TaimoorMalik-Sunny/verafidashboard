@@ -7,7 +7,8 @@ type Query {
     getWalletAttributes(input: GetWalletAttributesInput!): WalletAttributes!
     predictCreditScore(input: PredictCreditScoreInput!): AWSJSON
     getWalletNftsCount(input: GetWalletNftsCountInput!): GetWalletNftsCountOutput!
-    getHighestLtvLoans: [Loan!]!
+    getHighestLtvLoans(input: GetHighestLtvLoansInput): [Loan!]!
+    getWalletTokensAndAssets(input: GetWalletTokensAndAssetsInput!): GetWalletTokensAndAssetsOutput! 
 }
 
 type Mutation {
@@ -43,7 +44,7 @@ type Mutation {
     type CalcLaonSuccessProbabilityOutput { 
         probability: Float!
     }
-   type GetWalletNftsCountOutput {
+    type GetWalletNftsCountOutput {
         noOfNftTokens: Int!
         noOfBlueChipNftTokens: Int!
     }
@@ -53,7 +54,9 @@ type Mutation {
         amountEth: Float
         loanDurationSec: Int
         ltv: Float # loan to value ratio
+        apr: Float
         asset: Asset
+        loanPlatform: Platform
     }
 
     type Asset {
@@ -65,6 +68,24 @@ type Mutation {
         imgUrl: String
     }
 
+    type Crypto {
+        contractAddress: String!
+        balance: Int!
+        symbol: String
+        name: String
+        imgUrl: String
+    }
+
+    type Platform {
+        name: String!
+        websiteUrl: String
+        logoUrl: String
+    }
+
+    type GetWalletTokensAndAssetsOutput {
+        nfts: [Asset]!
+        tokens: [Crypto]!
+    }
 
 ######################## input types ##############################
     input PredictCreditScoreInput {
@@ -92,6 +113,12 @@ type Mutation {
         # isTimeBaseLoan: Boolean!
     }
     input GetWalletNftsCountInput {
+        walletAddress: String!
+    }
+    input GetHighestLtvLoansInput {
+        walletAddress: String
+    }
+    input GetWalletTokensAndAssetsInput {
         walletAddress: String!
     }
 
